@@ -2,7 +2,8 @@
   (:require [clojure.test :refer :all]
             [rapids.active-doc :refer :all]
             [rapids :refer :all]
-            [rapids.language.test :refer :all]))
+            [rapids.language.test :refer :all])
+  (:import (clojure.lang ExceptionInfo)))
 
 (deflow data-updating-flow [adoc]
   (set-data! adoc :foo (<*)))
@@ -51,7 +52,10 @@
 
           (testing "setting hierarchical data"
             (set-data! adoc [:b :c] "hello")
-            (is (= (get-data adoc [:b :c])))))))))
+            (is (= (get-data adoc [:b :c]))))
+
+          (testing "sending an invalid command"
+            (is (thrown? ExceptionInfo (continue! adoc :input [:foo])))))))))
 
 (deftest monitor-doc-test
   (with-test-env
