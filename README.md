@@ -1,4 +1,5 @@
 # rapids-active-doc
+[![rapids tests](https://github.com/precisely/rapids-active-doc/actions/workflows/tests.yml/badge.svg)](https://github.com/precisely/rapids-active-doc/actions/workflows/tests.yml)
 
 Share and coordinate data amongst runs. Active documents store data, verify that data using a schema and allow for actions to be run when certain conditions are met.   
 
