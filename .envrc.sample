@@ -1,0 +1,2 @@
+export MAVEN_REPO_AWS_ACCESS_KEY_ID={get-value-from-aneil}
+export MAVEN_REPO_AWS_ACCESS_KEY_SECRET={get-value-from-aneil}

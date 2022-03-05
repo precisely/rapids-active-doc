@@ -16,9 +16,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Show AWS Key
-      run: echo ${{ secrets.MAVEN_REPO_AWS_ACCESS_KEY_ID }}
-
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -27,6 +24,7 @@ jobs:
         aws-region: us-east-1
 
     - uses: actions/checkout@v2
+
     ## Useful for debugging problems - CI will pause and provide an ssh connection
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
