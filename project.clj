@@ -19,7 +19,6 @@
                          [precisely/rapids "0.9.6"]
                          [metosin/malli "0.8.0"]]
   :profiles {:dev {:plugins [[lein-dotenv "RELEASE"]
-                             [lein-cloverage "1.2.2"]]}
-             :user {:plugins [[lein-dotenv "RELEASE"]]}}
+                             [lein-cloverage "1.2.2"]]}}
   :repl-options {:init-ns rapids.active-doc})
 
