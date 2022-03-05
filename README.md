@@ -1,6 +1,6 @@
 # rapids-active-doc
 
-Active documents store data, verify that data using a schema and allow for actions to be run when certain conditions are met.   
+Share and coordinate data amongst runs. Active documents store data, verify that data using a schema and allow for actions to be run when certain conditions are met.   
 
 ## Installation
 
@@ -17,7 +17,7 @@ Active documents store data, verify that data using a schema and allow for actio
    Where your environment has the access key and secret set appropriately (ask Aneil or Constantine)
 
 ## Usage
-Active doc stores hierarchical data, accessible by `set-data!` and `get-data`. The `add-actions` and `remove-actions` methods allow detecting changes to the data and acting on them. The `monitor-doc` macro uses these methods to generate and handle interrupts within a body of code.
+Active doc stores hierarchical data, accessible by `set-data!` and `get-data`. The `add-actions` and `remove-actions` methods allow detecting changes to the data and acting on them. The `monitor-doc` macro uses these methods to detect and handle changes made by other runs within a body of code.
 
 ### Example
 ```clojure
