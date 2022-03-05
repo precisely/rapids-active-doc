@@ -18,7 +18,8 @@
   :managed-dependencies [[org.clojure/clojure "1.10.1"]
                          [precisely/rapids "0.9.6"]
                          [metosin/malli "0.8.0"]]
-  :profiles {:dev {:plugins [[lein-dotenv "RELEASE"]]}
+  :profiles {:dev {:plugins [[lein-dotenv "RELEASE"]
+                             [lein-cloverage "1.2.2"]]}
              :user {:plugins [[lein-dotenv "RELEASE"]]}}
   :repl-options {:init-ns rapids.active-doc})
 
