@@ -20,6 +20,8 @@ Share and coordinate data amongst runs. Active documents store data, verify that
 ## Usage
 Active doc stores hierarchical data, accessible by `set-data!` and `get-data`. The `add-actions` and `remove-actions` methods allow detecting changes to the data and acting on them. The `monitor-doc` macro uses these methods to detect and handle changes made by other runs within a body of code.
 
+Note that since the active doc is in fact a rapids Run, the `set-index!` method may be used with it.
+
 ### Example
 ```clojure
 (ns myns 
@@ -34,12 +36,17 @@ Active doc stores hierarchical data, accessible by `set-data!` and `get-data`. T
      )))
 ```
 ### create!
-Creates an active document - takes keywords
-```
- data - an optional map representing the data
- schema - an optional malli schema
- actions - an optional map of keywords to closures
- index - for indexing the document"
+Creates an active document - takes optional keyword arguments.
+```clojure
+(create! :data {:foo 1} :schema [:map [:foo :int]] 
+         :actions {:foo-greater-than-10 (fn [changes _] 
+                                          (if (and (contains? changes :foo) (> 10 (:foo changes)))
+                                            (send-alert!)))
+         :index {:type :foo-document})
+; data - an optional map representing the data
+; schema - an optional malli schema
+; actions - an optional map of keywords to closures
+; index - for indexing the document"
 ```
 
 ### get-data
