@@ -65,13 +65,16 @@ Sets data in the active doc.
 Adds one or more functions to the active doc. These functions will be called whenever a change is made (using `set-data!`).
 
 ```clojure
-(add-actions! adoc :foo-change (fn [changes original] (if (contains? changes :foo) (do-something))))
+(add-actions! adoc 
+   :foo-change (fn [changes original] 
+                 (if (contains? changes :foo)
+                   (do-something))))
 ```
 
 ### remove-actions!
 Removes one or more actions added with `add-actions!`:
 ```clojure
-(remove-actions! adoc :foo-changes)
+(remove-actions! adoc :foo-change :baz-too-low)
 ```
 
 ### monitor-doc
@@ -81,7 +84,7 @@ Monitors an active-doc for one or more changes and trigger a corresponding inter
   (monitor-doc [adoc {:when (fn [changes original] 
                                (if (:foo changes) 
                                  :value-passed-to-interruption-data
-                      :interrupt (flow [i] (:data i))}]
+                      :handle (flow [i] (do-something-with (:data i)))}]
     (do-things))
 ```
 
