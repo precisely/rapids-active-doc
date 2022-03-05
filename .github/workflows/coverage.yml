@@ -12,11 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    ## Useful for debugging problems - CI will pause and provide an ssh connection
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
-      if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
-
     - name: Install dependencies
       env:
         MAVEN_REPO_AWS_ACCESS_KEY_ID: ${{secrets.MAVEN_REPO_AWS_ACCESS_KEY_ID}}
