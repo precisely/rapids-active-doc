@@ -3,7 +3,7 @@
             [rapids.support.util :refer [reverse-interleave]]
             [malli.core :as s]))
 
-(declare update-data non-suspending-fn? add-active-doc-interruption-action)
+(declare update-data non-suspending-fn? add-active-doc-interruption-action normalize-field)
 
 (deflow active-doc
   [data schema actions]
@@ -29,8 +29,8 @@
 (defn get-data
   "Retrieves data from an active doc. Optional fields can be provided."
   ([adoc] (get-data adoc []))
-  ([adoc fields]
-   (-> (continue! adoc :input [:get (if (sequential? fields) fields [fields])])
+  ([adoc field]
+   (-> (continue! adoc :input [:get (normalize-field field)])
      :output first)))
 
 (defn set-data!
@@ -116,6 +116,10 @@
          (~'finally (remove-actions! ~'adoc ~@syms))))))
 
 ;; HELPERS
+(defn normalize-field [f]
+  (if (or (nil? f) (sequential? f)) f
+    [f]))
+
 (defn- update-data
   "Given a map (data) and a sequence of assignments, returns a new
   non-destructively updated data structure.
@@ -133,7 +137,10 @@
   => {:a {:b 999} :c 99}"
   [data field-values schema actions]
   {:pre [(map? data) (sequential? field-values) (map? actions)]}
-  (let [changes (reduce (fn [m [field val]] (assoc-in m (if (sequential? field) field [field]) val))
+  (let [changes (reduce (fn [m [field val]]
+                          (let [field (normalize-field field)]
+                            (if (empty? field) val
+                              (assoc-in m field val))))
                   {}
                   (partition 2 field-values))
         result  (merge data changes)]

@@ -54,6 +54,10 @@
             (is (= (set-data! adoc :a 3) nil))
             (is (= (get-data adoc :a) 3)))
 
+          (testing "setting all the data"
+            (is (= (set-data! adoc [] {:foo 1}) nil))
+            (is (= (get-data adoc) {:foo 1})))
+
           (testing "setting hierarchical data"
             (set-data! adoc [:b :c] "hello")
             (is (= (get-data adoc [:b :c]))))
