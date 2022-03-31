@@ -46,6 +46,10 @@
           (testing "getting hierarchical data"
             (is (= (get-data adoc [:b :c]) 2)))
 
+          (testing "getting all the data"
+            (is (= (get-data adoc []) {:a 1, :b {:c 2}}))
+            (is (= (get-data adoc) {:a 1, :b {:c 2}})))
+
           (testing "setting data"
             (is (= (set-data! adoc :a 3) nil))
             (is (= (get-data adoc :a) 3)))

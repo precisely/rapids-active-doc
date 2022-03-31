@@ -55,6 +55,12 @@ Gets data from the active-doc.
 (get-data adoc :foo :bar) ; Equivalent to (get-in (get-data adoc) [:foo :bar])
 ```
 
+Get all the data by providing an empty sequence or dropping the second argument:
+```clojure
+(get-data adoc []) ; empty sequence
+(get-data adoc) ; or no second argument
+```
+
 ### set-data!
 Sets data in the active doc.
 ```clojure
