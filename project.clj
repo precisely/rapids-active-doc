@@ -1,6 +1,6 @@
 (defn env [x] (eval (System/getenv x)))
 
-(defproject precisely/rapids-active-doc "0.0.2"
+(defproject precisely/rapids-active-doc "0.0.3"
   :description "Rapids active document"
   :min-lein-version "2.9.7"
   :url "http://github.com/precisely/rapids-active-doc"

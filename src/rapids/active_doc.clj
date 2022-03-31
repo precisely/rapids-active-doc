@@ -14,7 +14,6 @@
     (let [[cmd inputs] (<*)
           [data actions] (cond
                            (= cmd :get) (do
-                                          (println ">>>>>" {:data data :inputs inputs})
                                           (>* (get-in data (or inputs [])))
                                           [data actions])
                            (= cmd :set)
