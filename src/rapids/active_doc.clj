@@ -14,6 +14,7 @@
     (let [[cmd inputs] (<*)
           [data actions] (cond
                            (= cmd :get) (do
+                                          (println ">>>>>" {:data data :inputs inputs})
                                           (>* (get-in data (or inputs [])))
                                           [data actions])
                            (= cmd :set)
@@ -28,9 +29,10 @@
 
 (defn get-data
   "Retrieves data from an active doc. Optional fields can be provided."
-  [adoc fields]
-  (-> (continue! adoc :input [:get (if (sequential? fields) fields [fields])])
-    :output first))
+  ([adoc] (get-data adoc []))
+  ([adoc fields]
+   (-> (continue! adoc :input [:get (if (sequential? fields) fields [fields])])
+     :output first)))
 
 (defn set-data!
   "Updates data in the active doc.
